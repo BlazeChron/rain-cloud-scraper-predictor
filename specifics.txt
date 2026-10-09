@@ -1,0 +1,24 @@
+Scraping from the below link:
+https://www.nea.gov.sg/weather/rain-areas
+
+Image link format:
+ 1: https://www.nea.gov.sg/docs/default-source/rain-area/dpsri_70km_2026092712250000dBR.dpsri.png
+ 2:
+ 3:
+ 4:
+ 5:
+ 6:
+ 7:
+ 8:
+ 9: https://www.nea.gov.sg/docs/default-source/rain-area/dpsri_70km_2026092713150000dBR.dpsri.png
+10: https://www.nea.gov.sg/docs/default-source/rain-area/dpsri_70km_2026092713200000dBR.dpsri.png
+11: https://www.nea.gov.sg/docs/default-source/rain-area/dpsri_70km_2026092713250000dBR.dpsri.png
+
+This is 2026-09-27 1325hrs
+Latest is 10min behind the current time (eg. this website retrieved at 1335hrs)
+
+Try not to query more than once per second I guess
+
+Current date: 2026-10-09
+Latest accessible date: 2026-09-20
+Possible storing up to last 20 days before removing
