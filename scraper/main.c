@@ -34,18 +34,22 @@ int main()
   // Directory scanning
   DIR *dir;
   struct dirent *ent;
-  if ((dir = opendir("./images/")) == NULL)
-  {
-    printf("File directory ./images/ cannot be found\n");
-    return 1;
-  }
   
   while(1)
   {
+    printf("------------------------------\n");
+    printf("Cycle %d\n", total_cycles);
+    printf("------------------------------\n");
     time(start_time);
     *start_time -= 20 * 60; // 20 minutes ago, since 10min ago is earliest
     //memcpy(loop_time, start_time, sizeof(time_t));
     loop_time = start_time;
+
+    if ((dir = opendir("./images/")) == NULL)
+    {
+      printf("File directory ./images/ cannot be found\n");
+      return 1;
+    }
 
     for (int i = 0; i < LOOKBACK_LIMIT; i++)
     {
@@ -66,10 +70,10 @@ int main()
         date->tm_min / 5 * 5); 
 
       *loop_time -= 5 * 60;
-      printf("%s\n", imgs[i].image_name);
       imgs[i].is_present = 0;
     }
 
+    int file_count = 0;
     // check file directory
     printf("Scanning file directory...\n");
     while ((ent = readdir(dir)) != NULL)
@@ -92,7 +96,7 @@ int main()
         if (strcmp(ent->d_name, imgs[i].image_name) == 0)
         {
           imgs[i].is_present = 1;
-          printf("Present\n");
+          printf("Present %d / %d\n", ++file_count, LOOKBACK_LIMIT);
           is_recent_image = 1;
         }
       }
@@ -109,6 +113,10 @@ int main()
         rename(old_file_location, new_file_location);
       }
     }
+
+    printf("%d / %d recent files found. %s\n", file_count, LOOKBACK_LIMIT,
+      file_count == LOOKBACK_LIMIT ? "" : "Downloading missing files...");
+
     // start from the back
     for (int i = LOOKBACK_LIMIT - 1; i >= 0; i--)
     {
@@ -125,13 +133,16 @@ int main()
         {
           int random_time_interval = rand() % 30 + 45;
           printf("Sleeping for %d seconds to avoid IP ban\n", random_time_interval);
-          sleep(45 + random_time_interval);
+          sleep(random_time_interval);
         }
       }
     }
-
     printf("Cycle %d completed\n", ++total_cycles);
+    closedir(dir);
+
+    int random_time_interval = rand() % 180 + 300;
+    printf("Sleeping for %d seconds to wait for an update\n", random_time_interval);
+    sleep(random_time_interval);
   }
-  closedir(dir);
   return 0;
 }
