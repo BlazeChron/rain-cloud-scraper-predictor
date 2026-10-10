@@ -1,0 +1,1 @@
+int download_image();
