@@ -9,9 +9,9 @@
 
 FILE *file = NULL;
 
-void get_recent_link(char *ptr);
+//void get_recent_link(char *ptr);
 
-int download_image()
+int download_image(char *url, char *save_location)
 {
   // Global prep, called once before program start
   curl_global_init(CURL_GLOBAL_ALL);
@@ -28,6 +28,7 @@ int download_image()
   }
   printf("Initialised handle\n");
 
+  /*
   char image_name[40];
   get_recent_link(image_name);
   char *url_prefix = "https://www.nea.gov.sg/docs/default-source/rain-area/";
@@ -41,9 +42,10 @@ int download_image()
   printf("Saving to %s\n", file_location);
 
 
+  */
   printf("Opening file\n");
   // set up file to write
-  file = fopen(file_location, "w+");
+  file = fopen(save_location, "w+");
 
   // Handle options
   curl_easy_setopt(easy_handle, CURLOPT_URL, url);
@@ -71,27 +73,21 @@ int download_image()
   return 0;
 }
 
+/*
 #include <stdlib.h>
-#include <time.h>
 
 // put the ptr to the string here
 // ptr must have minimum size of 40
 void get_recent_link(char *ptr)
 {
-  time_t *current_time = malloc(sizeof(time_t));
-  struct tm *date = malloc(sizeof(struct tm));
-  time(current_time);
-  *current_time -= 20 * 60; // 20 minutes ago, since 10min ago is earliest
-  localtime_r(current_time, date);
-
-  //char edited_name[40]; // WARNING This is the minimum size
-  sprintf(ptr, "dpsri_70km_%d%02d%02d%02d%02d0000dBR.dpsri.png",
-    date->tm_year + 1900,
-    date->tm_mon + 1,
-    date->tm_mday,
-    date->tm_hour,
-    date->tm_min / 5 * 5); 
+    sprintf(ptr, "dpsri_70km_%d%02d%02d%02d%02d0000dBR.dpsri.png",
+      date->tm_year + 1900,
+      date->tm_mon + 1,
+      date->tm_mday,
+      date->tm_hour,
+      date->tm_min / 5 * 5); 
 }
 
 //https://www.nea.gov.sg/docs/default-source/rain-area/ 53 chars
 //images/ 7 chars
+*/

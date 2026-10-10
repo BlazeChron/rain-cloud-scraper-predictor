@@ -1,1 +1,1 @@
-int download_image();
+int download_image(char *url, char *save_location);
