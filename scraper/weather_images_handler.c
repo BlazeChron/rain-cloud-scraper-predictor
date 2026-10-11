@@ -28,21 +28,6 @@ int download_image(char *url, char *save_location)
   }
   printf("Initialised handle\n");
 
-  /*
-  char image_name[40];
-  get_recent_link(image_name);
-  char *url_prefix = "https://www.nea.gov.sg/docs/default-source/rain-area/";
-  char *folder_prefix = "images/";
-  
-  char url[93]; //prefix + image = 53 + 40 = 93
-  char file_location[47];
-  sprintf(url, "%s%s", url_prefix, image_name);
-  sprintf(file_location, "%s%s", folder_prefix, image_name);
-  printf("Accessing %s\n", url);
-  printf("Saving to %s\n", file_location);
-
-
-  */
   printf("Opening file\n");
   // set up file to write
   file = fopen(save_location, "w+");
@@ -72,22 +57,3 @@ int download_image(char *url, char *save_location)
   printf("Finished cleanup, exiting...\n");
   return 0;
 }
-
-/*
-#include <stdlib.h>
-
-// put the ptr to the string here
-// ptr must have minimum size of 40
-void get_recent_link(char *ptr)
-{
-    sprintf(ptr, "dpsri_70km_%d%02d%02d%02d%02d0000dBR.dpsri.png",
-      date->tm_year + 1900,
-      date->tm_mon + 1,
-      date->tm_mday,
-      date->tm_hour,
-      date->tm_min / 5 * 5); 
-}
-
-//https://www.nea.gov.sg/docs/default-source/rain-area/ 53 chars
-//images/ 7 chars
-*/
