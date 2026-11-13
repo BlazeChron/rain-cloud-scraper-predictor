@@ -3,3 +3,4 @@
 *.png
 tempenv
 *.tar.gz
+data/
